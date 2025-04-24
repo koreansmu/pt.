@@ -1,10 +1,16 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from pytube import YouTube
 import re
+import os
 
 app = Flask(__name__)
 CORS(app)
+
+# Serve the HTML test page at the root URL
+@app.route('/')
+def serve_html():
+    return send_from_directory('.', 'test.html')
 
 def download_video(url, resolution):
     try:
