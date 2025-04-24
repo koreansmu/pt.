@@ -72,5 +72,5 @@ def video_info():
     else:
         return jsonify({"error": error_message}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__=="__main__":
+app.run(host="82.25.112.8",port=8080,debug=True)
