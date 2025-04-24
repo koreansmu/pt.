@@ -4,7 +4,7 @@ from pytube import YouTube
 import re
 
 app = Flask(__name__)
-CORS (app)
+CORS(app)
 
 def download_video(url, resolution):
     try:
