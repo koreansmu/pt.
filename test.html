@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube API Tester</title>
+</head>
+<body>
+  <h2>Get Video Info</h2>
+  <input id="infoUrl" type="text" placeholder="YouTube video URL" size="50">
+  <button onclick="getVideoInfo()">Get Info</button>
+  <pre id="infoResult"></pre>
+
+  <h2>Download Video</h2>
+  <input id="downloadUrl" type="text" placeholder="YouTube video URL" size="50">
+  <input id="resolution" type="text" placeholder="Resolution (e.g., 720p)">
+  <button onclick="downloadVideo()">Download</button>
+  <pre id="downloadResult"></pre>
+
+  <script>
+    async function getVideoInfo() {
+      const url = document.getElementById('infoUrl').value;
+      const res = await fetch('http://82.25.112.8:8080/video_info', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+      const data = await res.json();
+      document.getElementById('infoResult').textContent = JSON.stringify(data, null, 2);
+    }
+
+    async function downloadVideo() {
+      const url = document.getElementById('downloadUrl').value;
+      const resolution = document.getElementById('resolution').value;
+      const res = await fetch(`http://82.25.112.8:8080/download/${resolution}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+      const data = await res.json();
+      document.getElementById('downloadResult').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
